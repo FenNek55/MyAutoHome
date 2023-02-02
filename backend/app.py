@@ -24,7 +24,7 @@ class SensorsRunner:
 print("NEW VERSION")
 
 def process_task():
-    runner = SensorsRunner(60)
+    runner = SensorsRunner(600)
 
     while True:
         runner.tick()
