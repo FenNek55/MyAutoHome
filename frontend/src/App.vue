@@ -3,7 +3,7 @@
     <h1>MyAutoHome</h1>
     <section class="cards">
       <BlindsOne/>
-      <PMSAirMeter/>
+      <PMSAirMeter :newestEntry="newestEntry"/>
     </section>
   </main>
 </template>
@@ -11,6 +11,27 @@
 <script lang="ts" setup>
 import BlindsOne from './components/devices/BlindsOne.vue'
 import PMSAirMeter from './components/devices/PMSAirMeter.vue';
+import { onMounted, ref } from 'vue';
+import axios from 'axios'
+import type { PMSEntry } from './types'
+
+const airQuality = ref<PMSEntry[]>([])
+const newestEntry = ref<PMSEntry | null>(null)
+
+const getDeviceData = () => {
+    axios.get('http://192.168.0.128:5000/pms').then((response) => {
+        airQuality.value = response.data;
+        newestEntry.value = response.data[0];
+    })
+}
+
+onMounted(() => {
+    getDeviceData()
+
+    setInterval(() => {
+        getDeviceData()
+    }, 60000)
+});
 </script>
 
 <style scoped>
