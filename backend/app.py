@@ -1,10 +1,12 @@
 import time
 from sensors import pms5003_1
 from database.database import insert_pms_reading, get_pms_readings
-import threading
+from multiprocessing import Process
 from flask import Flask, Response
 from database.database import insert_pms_reading, get_pms_readings
 import json
+
+procs = []
 
 class SensorsRunner:
     def __init__(self, sleep_time) -> None:
@@ -20,20 +22,17 @@ class SensorsRunner:
         print(pm25)
         print(pm10)
         insert_pms_reading(pm1, pm25, pm10)
-    
-    def run(self):
-        self.tick()
-        time.sleep(self.sleep_time)
-        self.run()
 
 runner = SensorsRunner(60)
 
-class BackgroundTasks(threading.Thread):
-    def run(self,*args,**kwargs):
-        runner.run()
+def process_task():
+    while True:
+        runner.tick()
+        time.sleep(runner.sleep_time)
 
-t = BackgroundTasks()
-t.start()
+proc = Process(target=process_task)
+procs.append(proc)
+proc.start()
 
 app = Flask(__name__)
 
@@ -54,9 +53,9 @@ def entries():
 
 @app.route("/")
 def test():
-    resp = Response("Worksa")
+    resp = Response("WorksTest")
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0", debug=True)

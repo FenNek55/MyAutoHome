@@ -1,4 +1,4 @@
-# docker run -it -p 5000:5000 --privileged --rm backend
+# docker run -d -p 5000:5000 -v $(pwm):/usr/src/app --privileged --rm backend
 
 FROM python:3
 
