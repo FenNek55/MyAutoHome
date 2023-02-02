@@ -6,8 +6,6 @@ from flask import Flask, Response
 from database.database import insert_pms_reading, get_pms_readings
 import json
 
-procs = []
-
 class SensorsRunner:
     def __init__(self, sleep_time) -> None:
         self.sleep_time = sleep_time
@@ -23,16 +21,14 @@ class SensorsRunner:
         print(pm10)
         insert_pms_reading(pm1, pm25, pm10)
 
-runner = SensorsRunner(60)
+print("NEW VERSION")
 
 def process_task():
+    runner = SensorsRunner(60)
+
     while True:
         runner.tick()
         time.sleep(runner.sleep_time)
-
-proc = Process(target=process_task)
-procs.append(proc)
-proc.start()
 
 app = Flask(__name__)
 
@@ -58,4 +54,6 @@ def test():
     return resp
 
 if __name__ == "__main__":
+    proc = Process(target=process_task)
+    proc.start()
     app.run(host="0.0.0.0", debug=True)
