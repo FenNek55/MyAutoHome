@@ -34,12 +34,18 @@ app = Flask(__name__)
 
 @app.route("/pms")
 def entries():
-    pms_entries = get_pms_readings(100)
-    formatted = {
-        'data': []
-    }
-    for i, entry in enumerate(pms_entries):
-        formatted['data'].append(entry)
+    pms_entries = get_pms_readings(1000)
+    formatted = []
+
+    for entry in pms_entries:
+        formatted_entry = {
+            'id': entry[0],
+            'timestamp': entry[1],
+            'pm1': entry[2],
+            'pm25': entry[3],
+            'pm10': entry[4]
+        }
+        formatted.append(formatted_entry)
 
     resp = Response(json.dumps(formatted, indent=4))
     resp.headers['Access-Control-Allow-Origin'] = '*'
@@ -56,4 +62,4 @@ def test():
 if __name__ == "__main__":
     proc = Process(target=process_task)
     proc.start()
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host="0.0.0.0")
