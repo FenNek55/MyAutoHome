@@ -2,3 +2,4 @@ pms5003>=0.0.5
 RPi.GPIO>=0.7.1
 Flask>=2.2.2
 Flask-Cors==1.10.3
+adafruit-circuitpython-dht==3.7.8
