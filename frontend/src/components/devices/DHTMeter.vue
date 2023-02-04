@@ -2,8 +2,8 @@
     <Card>
         <h2>Warunki powietrza</h2>
         <div class="dht__date">Ostatnio aktualizowane: {{ lastUpdateDate }}</div>
-        <div class="dht__entry">Temperatura: <span class="dht__value">{{ newestEntry?.temperature }}</span></div>
-        <div class="dht__entry">Wilgotność: <span class="dht__value">{{ newestEntry?.humidity }}</span></div>
+        <div class="dht__entry">Temperatura: <span class="dht__value">{{ newestEntry?.temperature }}°C</span></div>
+        <div class="dht__entry">Wilgotność: <span class="dht__value">{{ newestEntry?.humidity }}%</span></div>
     </Card>
 </template>
 
