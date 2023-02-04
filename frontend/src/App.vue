@@ -3,7 +3,8 @@
     <h1>MyAutoHome</h1>
     <section class="cards">
       <BlindsOne/>
-      <PMSAirMeter :newestEntry="newestEntry"/>
+      <PMSAirMeter :newestEntry="newestPmsEntry"/>
+      <DHTMeter :newestEntry="newestDhtEntry"/>
     </section>
   </main>
 </template>
@@ -11,25 +12,38 @@
 <script lang="ts" setup>
 import BlindsOne from './components/devices/BlindsOne.vue'
 import PMSAirMeter from './components/devices/PMSAirMeter.vue';
+import DHTMeter from './components/devices/DHTMeter.vue';
 import { onMounted, ref } from 'vue';
 import axios from 'axios'
-import type { PMSEntry } from './types'
+import type { PMSEntry, DHTEntry } from './types'
 
-const airQuality = ref<PMSEntry[]>([])
-const newestEntry = ref<PMSEntry | null>(null)
+const pmsData = ref<PMSEntry[]>([])
+const newestPmsEntry = ref<PMSEntry | null>(null)
 
-const getDeviceData = () => {
+const dhtData = ref<DHTEntry[]>([])
+const newestDhtEntry = ref<DHTEntry | null>(null)
+
+const getPmsData = () => {
     axios.get('http://192.168.0.128:5000/pms').then((response) => {
-        airQuality.value = response.data;
-        newestEntry.value = response.data[0];
+        pmsData.value = response.data;
+        newestPmsEntry.value = response.data[0];
+    })
+}
+
+const getDhtData = () => {
+    axios.get('http://192.168.0.128:5000/dht').then((response) => {
+        dhtData.value = response.data;
+        newestDhtEntry.value = response.data[0];
     })
 }
 
 onMounted(() => {
-    getDeviceData()
+  getPmsData()
+  getDhtData()
 
     setInterval(() => {
-        getDeviceData()
+      getPmsData()
+      getDhtData()
     }, 60000)
 });
 </script>
