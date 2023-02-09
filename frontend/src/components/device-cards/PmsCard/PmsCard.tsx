@@ -54,7 +54,7 @@ const PmsCard = () => {
 
         const intervalId = setInterval(() => {
             fetchPmsData();
-        }, 1000);
+        }, 60000);
 
         return () => clearInterval(intervalId);
     }, [])
