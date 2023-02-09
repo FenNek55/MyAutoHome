@@ -1,32 +1,17 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import BlindsCard from './components/device-cards/BlindsCard/BlindsCard'
+import PmsCard from './components/device-cards/PmsCard/PmsCard'
+import DhtCard from './components/device-cards/DhtCard/DhtCard'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className='container container--root'>
+      <h1 className="app__title">MyAutoHome</h1>
+      <div className='app__grid'>
+        <BlindsCard name='Żaluzje sypialnia' openLink='http://192.168.0.136/open' closeLink='http://192.168.0.136/close'/>
+        <PmsCard/>
+        <DhtCard/>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
   )
 }

@@ -1,0 +1,21 @@
+.pms-card__last-update {
+    margin-bottom: 14px;
+    color: gray;
+    font-size: 12px;
+}
+
+.pms-card__value {
+    font-weight: 600;
+}
+
+.pms-card__value--good {
+    color: green;
+}
+
+.pms-card__value--bad {
+    color: rgb(228, 18, 18);
+}
+
+.pms-card__value--medium {
+    color: rgb(251, 175, 34);
+}

@@ -1,0 +1,9 @@
+.dht-card__last-update {
+    margin-bottom: 14px;
+    color: gray;
+    font-size: 12px;
+}
+
+.dht-card__value {
+    font-weight: 600;
+}
