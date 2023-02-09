@@ -14,7 +14,6 @@ const BlindsCard = (props: BlindsCardProps) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const openBlinds = () => {
-        console.log('Otwieranie żaluzji...')
         setIsLoading(true);
         fetch(props.openLink)
             .then(() => setIsLoading(false))
@@ -22,7 +21,6 @@ const BlindsCard = (props: BlindsCardProps) => {
     }
 
     const closeBlinds = () => {
-        console.log('Zamykanie żaluzji...')
         setIsLoading(true);
         fetch(props.closeLink)
             .then(() => setIsLoading(false))

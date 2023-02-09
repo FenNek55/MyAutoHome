@@ -1,0 +1,11 @@
+.dht-chart-card__wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+@media(min-width: 768px) {
+    .dht-chart-card {
+        grid-column: span 2;
+    }
+}

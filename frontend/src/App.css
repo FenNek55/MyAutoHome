@@ -1,6 +1,6 @@
 .app__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     gap: 20px;
 }
 
@@ -8,4 +8,31 @@
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 20px;
+}
+
+.app__background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./assets/home.svg');
+    background-repeat: no-repeat;
+    background-size: 400px;
+    background-position: bottom -50px right -100px;
+    z-index: -1;
+    opacity: 0.1;
+}
+
+@media (min-width: 768px) {
+    .app__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .app__background {
+        background-size: 600px;
+        background-position: bottom -50px right -50px;
+    }
 }
